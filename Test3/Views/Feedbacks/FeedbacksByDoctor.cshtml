@@ -1,0 +1,52 @@
+﻿@using Test3.Models
+@model List<FeedbackData>
+
+@{
+    ViewBag.Title = "Feedbacks by Doctor";
+}
+
+<h2>Feedbacks by Doctor</h2>
+
+<div id="chart_div"></div>
+<div id="info_div"></div>
+<p>
+    <a href="@Url.Action("Index", "Feedbacks")" class="btn btn-primary">Return</a>
+</p>
+
+@section Scripts {
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Doctor');
+            data.addColumn('number', 'Feedbacks');
+            data.addRows([
+                @foreach (var item in Model) {
+                    @: ['@item.DoctorId', @item.Count],
+                }
+            ]);
+
+            var options = {
+                'title': 'Feedbacks by Doctor',
+                'width': 600,
+                'height': 400
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+
+            // 添加select事件监听器
+            google.visualization.events.addListener(chart, 'select', function () {
+                var selectedItem = chart.getSelection()[0];
+                if (selectedItem) {
+                    var doctor = data.getValue(selectedItem.row, 0);
+                    var feedbacks = data.getValue(selectedItem.row, 1);
+                    document.getElementById('info_div').innerHTML = doctor + ': ' + feedbacks;
+                }
+            });
+        }
+    </script>
+}

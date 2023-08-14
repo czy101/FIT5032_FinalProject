@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Success Login";
+}
+
+<h2>Success Login</h2>
+
+<p>You have successfully logged in.</p>
+
+@using Microsoft.AspNet.Identity
+@using Test3.Models
+@using Microsoft.AspNet.Identity.Owin
+
+@{
+    // 获取当前登录用户
+    var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    var user = userManager.FindById(User.Identity.GetUserId());
+}
+
+<p>
+    @if (user.Person_role == "Doctor")
+    {
+        <a href="@Url.Action("Doctor_Index", "Appointments", new { id = user.Id })" class="btn btn-primary">Doctor Index</a>
+        <a href="@Url.Action("Index", "Feedbacks")" class="btn btn-primary">Feedback</a>
+        <a href="@Url.Action("SendFeedbackGet", "Appointments")" class="btn btn-primary">Send Feedback</a>
+
+    }
+    else if (user.Person_role == "Patient")
+    {
+        <a href="@Url.Action("Patient_Index", "Appointments", new { id = user.Id })" class="btn btn-primary">Patient Index</a>
+        <a href="@Url.Action("Show_data_table", "Appointments", new { id = user.Id })" class="btn btn-primary">Interactive Table Data</a>
+    }
+</p>

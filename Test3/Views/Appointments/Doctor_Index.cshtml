@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Test3.Models.Appointment>
+
+@{
+    ViewBag.Title = "Doctor_Index";
+}
+
+<h2>Doctor Appointment Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Doctor_Create")
+    <a href="@Url.Action("success_Login", "Home")" class="btn btn-primary">Retrun</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Appointment_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Doctor_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appointment_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient_email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Doctor_Accept_Finish", new { id = item.Appointment_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Appointment_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Appointment_id })
+            </td>
+        </tr>
+    }
+
+</table>

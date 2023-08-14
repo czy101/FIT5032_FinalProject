@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Feedbacks">
+      <EntityTypeMapping TypeName="Model1.Feedback">
+        <MappingFragment StoreEntitySet="Feedbacks">
+          <ScalarProperty Name="Feedback_id" ColumnName="Feedback_id" />
+          <ScalarProperty Name="Appointment_id" ColumnName="Appointment_id" />
+          <ScalarProperty Name="Appointment_Date" ColumnName="Appointment_Date" />
+          <ScalarProperty Name="Feedback_Date" ColumnName="Feedback_Date" />
+          <ScalarProperty Name="Feedback_Content" ColumnName="Feedback_Content" />
+          <ScalarProperty Name="Doctor_id" ColumnName="Doctor_id" />
+          <ScalarProperty Name="Patient_id" ColumnName="Patient_id" />
+          <ScalarProperty Name="Patient_Person_Name" ColumnName="Patient_Person_Name" />
+          <ScalarProperty Name="Patient_email" ColumnName="Patient_email" />
+          <ScalarProperty Name="Feedback_File_Path" ColumnName="Feedback_File_Path" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

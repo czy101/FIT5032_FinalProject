@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNet.Identity
+@using Test3.Models
+@using Microsoft.AspNet.Identity.Owin
+@if (Request.IsAuthenticated)
+{
+    // 获取当前登录用户
+    var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    var user = userManager.FindById(User.Identity.GetUserId());
+    // 根据用户角色显示不同的欢迎消息
+    var greeting = "Hello!";
+    if (user.Person_role == "Doctor")
+    {
+        greeting += "Doctor";
+    }
+    else if (user.Person_role == "Patient")
+    {
+        greeting += "Patient";
+    }
+    greeting += "!";
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink(greeting + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
+            </li>
+            <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+    </ul>
+}

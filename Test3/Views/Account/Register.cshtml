@@ -1,0 +1,91 @@
+﻿@model Test3.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title.</h2>
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+            <h4>Create new account.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="row">
+   
+            <label for="Email" class="col-md-2 col-form-label">Email</label>
+
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+    
+            <label for="Password" class="col-md-2 col-form-label">Password</label>
+
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+           
+            <label for="ConfirmPassword" class="col-md-2 col-form-label">Confirm Password</label>
+
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!-- 新增输入字段 -->
+        <div class="row">
+            @Html.LabelFor(m => m.Person_name, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Person_name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Age, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Gender, new List<SelectListItem> {
+                    new SelectListItem { Text = "man", Value = "man" },
+                    new SelectListItem { Text = "women", Value = "women" }
+                }, "-- please select --", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Person_role, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Person_role, new List<SelectListItem> {
+                    new SelectListItem { Text = "Doctor", Value = "Doctor" },
+                    new SelectListItem { Text = "Patient", Value = "Patient" }
+                }, "-- please select --", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+
+            <label for="Department(Doctor Only)" class="col-md-2 col-form-label">Department</label>
+
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Department, new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="offset-md-2 col-md-10">
+                <input type="submit" value="Register" class="btn btn-outline-dark" />
+            </div>
+        </div>
+    }
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Test3.Models.AppointmentViewModel>
+
+@{
+    ViewBag.Title = "Show_data_table";
+}
+
+<h2>Interactive Table Data</h2>
+<p>
+    @Html.ActionLink("Create New", "Patient_Create")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Appointment_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doctor_id)
+            </th>
+            <th>
+                @Html.DisplayName("Doctor_name")
+            </th>
+            <th>
+                @Html.DisplayName("Doctor_email")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Appointment_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor_email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    |
+                    @Html.ActionLink("Details", "Patient_Details", new { id = item.Appointment_id }) |
+                    @Html.ActionLink("Delete", "Patient_Delete", new { id = item.Appointment_id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });
+    </script>
+
+
+}

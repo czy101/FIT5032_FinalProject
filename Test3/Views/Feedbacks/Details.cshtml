@@ -1,0 +1,66 @@
+﻿@model Test3.Models.Feedback
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Feedback</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Appointment_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Appointment_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Feedback_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Feedback_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Feedback_Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Feedback_Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Feedback_File_Path)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Feedback_File_Path)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Feedback_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

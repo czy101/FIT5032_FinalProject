@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Test3.Models.Feedback>
+
+@{
+    ViewBag.Title = "Feedback Index";
+}
+
+<h2>Doctor Feedback Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+
+    <a href="@Url.Action("success_Login", "Home")" class="btn btn-primary">Retrun</a>
+    <a href="@Url.Action("FeedbacksByDoctor", "Feedbacks")" class="btn btn-primary">Feedbacks By Doctor</a>
+    <a href="@Url.Action("ExportCSVData", "Feedbacks")" class="btn btn-primary">Export CSV Data</a>
+    <a href="@Url.Action("ExportJSONData", "Feedbacks")" class="btn btn-primary">Export JSON Data</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Appointment_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feedback_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feedback_Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Doctor_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feedback_File_Path)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Appointment_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feedback_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feedback_Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doctor_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feedback_File_Path)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Feedback_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Feedback_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Feedback_id })
+        </td>
+    </tr>
+}
+
+</table>

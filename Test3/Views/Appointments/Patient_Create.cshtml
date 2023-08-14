@@ -1,0 +1,98 @@
+﻿@model Test3.Models.Appointment
+
+@{
+    ViewBag.Title = "Patient_Create";
+}
+
+<h2>Patient_Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Appointment</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label("Department", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Department", (SelectList)ViewBag.Departments, "Please Select", new { @class = "form-control", id = "Department" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Doctor", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Doctor", Enumerable.Empty<SelectListItem>(), "Please Select", new { @class = "form-control", id = "Doctor" })
+                @Html.HiddenFor(model => model.Doctor_id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Patient_id)
+        </div>
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Patient_email, new { @id = "Patient_email" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" id="Date" name="Date" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Patient_Index", new { id = Model.Patient_id })
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            // 获取所有医生数据
+            var doctors = JSON.parse('@Html.Raw(Json.Encode(ViewBag.Doctors))');
+
+            // 当用户选择一个部门时，更新医生下拉框的选项
+            $("#Department").change(function () {
+                var department = $(this).val();
+                var doctorSelect = $("#Doctor");
+                doctorSelect.empty();
+                doctorSelect.append($('<option>', {
+                    value: "",
+                    text: "Please Select"
+                }));
+                $.each(doctors, function (index, doctor) {
+                    if (doctor.Department == department) {
+                        doctorSelect.append($('<option>', {
+                            value: doctor.Id,
+                            text: doctor.Person_name
+                        }));
+                    }
+                });
+            });
+
+            // 当用户选择一个医生时，更新医生ID字段的值并显示提示信息
+            $("#Doctor").change(function () {
+                var doctorId = $(this).val();
+                var doctorName = $("#Doctor option:selected").text();
+                $("#Doctor_id").val(doctorId);
+                if (doctorId) {
+                    alert("选择" + doctorName + "医生成功，Id为" + doctorId);
+                }
+            });
+        });
+    </script>
+}
